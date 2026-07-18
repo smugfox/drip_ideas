@@ -37,9 +37,13 @@
     const cta = opts.soon
       ? `<button class="btn sm btn-secondary st-cta" data-remind>🔔 Remind me</button>`
       : '';
+    const isLive = !opts.soon && !opts.replay;
     const sub = opts.replay ? `Ended show`
       : opts.soon ? `Starts in ${s.in}`
         : `★ ${s.rating} · ${s.viewers} watching`;
+    const avatar = isLive
+      ? `<span class="av-ring"><span class="st-av ${avatarGrad(s.seller)}"></span><span class="av-live">LIVE</span></span>`
+      : `<span class="st-av ${avatarGrad(s.seller)}"></span>`;
     el.innerHTML = `
       <div class="thumb ${s.g}">
         <img class="thumb-img" src="${s.img}" loading="lazy" alt="" onerror="this.remove()" />
@@ -49,7 +53,7 @@
       <div class="meta">
         <div class="st-title">${s.title}</div>
         <div class="st-row">
-          <span class="st-av ${avatarGrad(s.seller)}"></span>
+          ${avatar}
           <span>
             <span class="st-seller">${s.seller}</span><br/>
             <span class="st-sub">${sub}</span>

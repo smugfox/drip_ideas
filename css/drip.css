@@ -84,8 +84,15 @@
 .thumb .bl { position: absolute; bottom: 9px; left: 9px; z-index: 3; }
 .scard .meta { padding: 10px 2px 0; }
 .scard .st-title { font-weight: 700; font-size: 14px; line-height: 1.3; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
-.scard .st-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.scard .st-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
 .scard .st-av { width: 22px; height: 22px; border-radius: 50%; flex: none; }
+/* live seller avatar: gradient ring + LIVE pill (matches Drip) */
+.av-ring { position: relative; width: 38px; height: 38px; flex: none; border-radius: 50%; padding: 2px; box-sizing: border-box;
+  background: linear-gradient(140deg, #ff5ea0, #b14dff); }
+.av-ring .st-av { width: 100%; height: 100%; border: 2px solid var(--surface); }
+.av-live { position: absolute; left: 50%; bottom: -7px; transform: translateX(-50%);
+  background: var(--live); color: #fff; font-weight: 800; font-size: 8px; letter-spacing: .03em;
+  line-height: 1; padding: 2px 5px; border-radius: 4px; border: 1.5px solid var(--surface); }
 .scard .st-seller { font-size: 12px; color: var(--on-surface-muted); font-weight: 600; }
 .scard .st-sub { font-size: 11px; color: var(--on-surface-faint); }
 .scard .st-cta { margin-left: auto; }
