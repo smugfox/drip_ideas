@@ -42,6 +42,7 @@
         : `★ ${s.rating} · ${s.viewers} watching`;
     el.innerHTML = `
       <div class="thumb ${s.g}">
+        <img class="thumb-img" src="${s.img}" loading="lazy" alt="" onerror="this.remove()" />
         ${badge}${featured}${opts.soon ? '' : catTag}
         <span class="live-preview">▶ live preview on hover</span>
       </div>

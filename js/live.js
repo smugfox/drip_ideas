@@ -8,6 +8,7 @@
   const hash = (str) => str.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
   const grad = (name) => D.grad(hash(name));
   const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const bg = (lot) => `background-image:url('${lot.img}');background-size:cover;background-position:center;`;
 
   // ---- params ----
   const p = new URLSearchParams(location.search);
@@ -17,6 +18,14 @@
   $('#shName').textContent = seller;
   $('#shAvatar').className = 'sh-av ' + grad(seller);
   $('#shViewers').textContent = viewers;
+
+  // put a real stream image behind the video stage
+  const cam = $('#stage .cam');
+  if (cam && D.stageBg) {
+    cam.style.backgroundImage = `linear-gradient(rgba(6,7,10,.28), rgba(6,7,10,.58)), url('${D.stageBg}')`;
+    cam.style.backgroundSize = 'cover';
+    cam.style.backgroundPosition = 'center';
+  }
 
   // ---- state ----
   const S = { i: 0, lot: null, timeLeft: 0, cur: 0, inc: 5, high: '', youHigh: false, sold: false, hist: [] };
@@ -36,7 +45,7 @@
     return `
       <div class="a-top"><span class="badge soft">⚡ Auction</span><span class="a-set">Lot ${S.i + 1} of ${D.lots.length}</span></div>
       <div class="a-lot">
-        <div class="a-thumb ${lot.g}"></div>
+        <div class="a-thumb ${lot.g}" style="${bg(lot)}"></div>
         <div><div class="a-name">${lot.name}</div><div class="a-set">${lot.set}</div></div>
       </div>
       <div class="a-bidbox">
@@ -61,7 +70,7 @@
     return `
       <div class="a-top"><span class="badge" style="background:var(--buy);color:#fff">Buy now</span><span class="a-set">Lot ${S.i + 1} of ${D.lots.length}</span></div>
       <div class="a-lot">
-        <div class="a-thumb ${lot.g}"></div>
+        <div class="a-thumb ${lot.g}" style="${bg(lot)}"></div>
         <div><div class="a-name">${lot.name}</div><div class="a-set">${lot.set}</div></div>
       </div>
       <div class="a-bidbox a-buy">
@@ -77,7 +86,7 @@
   function nowCardHTML(lot) {
     if (lot.type === 'auction') {
       return `
-        <div class="nc-thumb ${lot.g}"></div>
+        <div class="nc-thumb ${lot.g}" style="${bg(lot)}"></div>
         <div class="nc-body">
           <div class="nc-eyebrow">⚡ Auction · selling now</div>
           <div class="nc-title">${lot.name}</div>
@@ -89,7 +98,7 @@
         </div>`;
     }
     return `
-      <div class="nc-thumb ${lot.g}"></div>
+      <div class="nc-thumb ${lot.g}" style="${bg(lot)}"></div>
       <div class="nc-body">
         <div class="nc-eyebrow">Selling now</div>
         <div class="nc-title">${lot.name}</div>
@@ -102,7 +111,7 @@
     if (lot.type === 'auction') {
       return `<div class="m-acard">
         <div class="r1">
-          <div class="m-thumb ${lot.g}"></div>
+          <div class="m-thumb ${lot.g}" style="${bg(lot)}"></div>
           <div style="flex:1;min-width:0"><div class="m-name">${lot.name}</div><div class="m-sub">Bid <b class="js-cur">$${S.cur}</b> · <span class="js-highname">@${S.high}</span></div></div>
           <div class="m-clock tnum js-clock">${clock(S.timeLeft)}</div>
         </div>
@@ -112,7 +121,7 @@
         </div></div>`;
     }
     return `<div class="m-acard">
-      <div class="r1"><div class="m-thumb ${lot.g}"></div><div style="flex:1;min-width:0"><div class="m-name">${lot.name}</div><div class="m-sub">$${lot.price} · ${lot.set}</div></div></div>
+      <div class="r1"><div class="m-thumb ${lot.g}" style="${bg(lot)}"></div><div style="flex:1;min-width:0"><div class="m-name">${lot.name}</div><div class="m-sub">$${lot.price} · ${lot.set}</div></div></div>
       <div class="r2"><button class="btn sm btn-primary block" data-act="buy">Buy now — $${lot.price}</button></div></div>`;
   }
 
@@ -225,7 +234,7 @@
   function queueItem(lot, idx) {
     const tag = lot.type === 'auction' ? `<span class="badge dark tl" style="font-size:9px">⚡ ${clock(lot.dur)}</span>` : `<span class="badge dark tl" style="font-size:9px">BUY</span>`;
     return `<div class="qitem" data-jump="${idx}">
-      <div class="qthumb ${lot.g}">${tag}</div>
+      <div class="qthumb ${lot.g}" style="${bg(lot)}">${tag}</div>
       <div class="qcap">${lot.name}</div>
       <div class="qprice">${lot.type === 'auction' ? 'from $' + lot.start : '$' + lot.price}</div>
     </div>`;
@@ -237,7 +246,7 @@
       ? `<button class="btn sm btn-secondary" data-jump="${idx}">Bid ⚡</button>`
       : `<button class="btn sm btn-primary" data-jump="${idx}">$${lot.price}</button>`;
     return `<div class="pcard" data-jump="${idx}">
-      <div class="pc-thumb ${lot.g}"></div>
+      <div class="pc-thumb ${lot.g}" style="${bg(lot)}"></div>
       <div style="min-width:0;flex:1"><div class="pc-title">${lot.name}</div><div class="pc-sub">${lot.set}</div></div>
       ${action}
     </div>`;

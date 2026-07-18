@@ -22,6 +22,8 @@
 }
 .logo { display: inline-flex; align-items: center; gap: 8px; padding: 6px 8px 16px; }
 .brand-mark { font: 800 26px/1 var(--font-head); letter-spacing: -0.04em; color: var(--brand); }
+.brand-img { height: 26px; width: auto; display: block; }
+.live-rail-left .brand-img { height: 15px; margin-bottom: 6px; }
 .logo .tag { font: var(--type-label); letter-spacing: var(--type-label-ls); text-transform: uppercase; color: var(--on-surface-faint); border: 1px solid var(--border-strong); border-radius: var(--rounded-full); padding: 2px 7px; }
 .nav-group { font: var(--type-label); letter-spacing: var(--type-label-ls); text-transform: uppercase; color: var(--on-surface-faint); padding: 14px 10px 6px; }
 .nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: var(--rounded-sm); color: var(--on-surface-muted); font-weight: 600; cursor: pointer; transition: background .15s, color .15s; }
@@ -70,7 +72,8 @@
 /* stream card */
 .scard { cursor: pointer; }
 .scard .thumb { position: relative; aspect-ratio: 16/10; border-radius: var(--rounded-md); overflow: hidden; border: 1px solid var(--border); }
-.scard .thumb::after { content:""; position:absolute; inset:0; background: radial-gradient(120% 100% at 50% 0%, transparent 55%, rgba(0,0,0,.35)); }
+.scard .thumb::after { content:""; position:absolute; inset:0; z-index:1; background: radial-gradient(120% 100% at 50% 0%, transparent 55%, rgba(0,0,0,.35)); }
+.scard .thumb .thumb-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
 .scard:hover .thumb { border-color: var(--border-strong); }
 .scard:hover .thumb .live-preview { opacity: 1; }
 .live-preview { position:absolute; inset:0; display:grid; place-items:center; font: var(--type-caption); letter-spacing: var(--type-caption-ls); color: rgba(255,255,255,.85); opacity:.0; transition: opacity .2s; z-index:2; }
