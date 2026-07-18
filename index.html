@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Drip — Live Shopping (prototype)</title>
+  <meta name="description" content="Drip live-shopping prototype — discovery, live streams, and auctions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/kiri-base.css" />
+  <link rel="stylesheet" href="css/drip.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <span class="brand-mark">drip</span>
+        <span class="tag">proto</span>
+      </div>
+      <div class="nav-group">Explore</div>
+      <div class="nav-item"><span class="ic">⌂</span> Home</div>
+      <div class="nav-item active"><span class="ic">◉</span> Live Streams</div>
+      <div class="nav-item"><span class="ic">⚡</span> Instant Packs</div>
+      <div class="nav-item"><span class="ic">🛍</span> Marketplace</div>
+      <div class="nav-item"><span class="ic">★</span> Rewards</div>
+      <div class="nav-group">Selling</div>
+      <div class="nav-item nav-sell"><span class="ic">＄</span> Become a Seller</div>
+      <div class="spacer"></div>
+      <div class="nav-item"><span class="ic">?</span> Help &amp; support</div>
+    </aside>
+
+    <!-- main -->
+    <div class="main">
+      <header class="topbar">
+        <div class="searchbox">
+          <span class="ic">🔎</span>
+          <input class="input" placeholder="Search Drip…" />
+        </div>
+        <div class="spacer"></div>
+        <div class="tb-actions">
+          <button class="icon-btn" title="Notifications">🔔</button>
+          <button class="icon-btn" title="Messages">💬</button>
+          <button class="icon-btn" title="Cart">🛒</button>
+          <span class="token-pill">💎 <span class="tnum">16</span></span>
+          <span class="balance"><span class="lbl">$</span><span class="tnum">0</span> <span class="plus">+</span></span>
+          <span class="avatar g-slate"></span>
+        </div>
+      </header>
+
+      <main class="content">
+        <h1 class="page-title">Live</h1>
+        <p class="page-sub">Shop live shows from sellers — bid, buy, and rip in real time.</p>
+
+        <div class="filters" id="filters"></div>
+
+        <section class="section" data-section>
+          <div class="section-head"><h2>Happening now</h2><span class="count" id="hn-count"></span></div>
+          <div class="grid" id="happening"></div>
+        </section>
+
+        <section class="section" data-section>
+          <div class="section-head"><h2>Starting soon</h2><span class="more">See schedule →</span></div>
+          <div class="grid" id="soon"></div>
+        </section>
+
+        <section class="section" data-section>
+          <div class="section-head"><h2>For you</h2><span class="count">because you collect Pokémon</span></div>
+          <div class="grid" id="foryou"></div>
+        </section>
+
+        <section class="section" data-section>
+          <div class="section-head"><h2>Replays</h2><span class="count">catch up 24/7</span></div>
+          <div class="grid" id="replays"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- mobile bottom nav -->
+  <nav class="botnav">
+    <a class="active"><span class="ic">◉</span>Live</a>
+    <a><span class="ic">⌂</span>Home</a>
+    <a><span class="ic">⚡</span>Packs</a>
+    <a><span class="ic">🛍</span>Shop</a>
+    <a><span class="ic">★</span>Rewards</a>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/discovery.js"></script>
+</body>
+</html>

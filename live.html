@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Drip — Live Stream (prototype)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/kiri-base.css" />
+  <link rel="stylesheet" href="css/drip.css" />
+</head>
+<body>
+  <div class="liveroom">
+    <!-- left icon rail (desktop) -->
+    <nav class="live-rail-left">
+      <a href="index.html" class="brand-mark" title="Home">d</a>
+      <a href="index.html" class="ic" title="Back to Live">◉</a>
+      <div class="ic">⚡</div>
+      <div class="ic">🛍</div>
+      <div class="ic">★</div>
+    </nav>
+
+    <!-- center column -->
+    <div class="live-center">
+      <div class="stream-head">
+        <a href="index.html" class="ic" style="font-size:22px;color:inherit;padding-right:4px" title="Back">‹</a>
+        <span class="sh-av" id="shAvatar"></span>
+        <span>
+          <span class="sh-name" id="shName">Charmenic</span>
+          <span class="sh-sub"><span class="badge live" style="padding:1px 5px">● LIVE</span> <span id="shViewers" class="tnum">312</span> watching</span>
+        </span>
+        <button class="btn sm btn-brand" id="followBtn" style="margin-left:10px">+ Follow</button>
+        <div class="spacer"></div>
+        <button class="icon-btn m-hide" title="Share">↗</button>
+        <button class="icon-btn m-hide" title="Fullscreen">⛶</button>
+      </div>
+
+      <div class="stage-wrap">
+        <div class="stage" id="stage">
+          <div class="cam"></div>
+          <div class="vid-note">◉ LIVE VIDEO<br /><span style="font-size:12px">seller camera · 16:9 stage</span></div>
+          <div class="tl">
+            <span class="badge live">● LIVE</span>
+            <span class="badge dark" id="lotBadge">Lot 1</span>
+          </div>
+
+          <!-- desktop selling-now overlay -->
+          <div class="now-card" id="nowCard"></div>
+
+          <!-- desktop reactions -->
+          <div class="reactions">
+            <button class="rx-btn" data-rx="❤️">❤️</button>
+            <button class="rx-btn" data-rx="🔥">🔥</button>
+            <button class="rx-btn" data-rx="🎉">🎉</button>
+          </div>
+
+          <!-- ===== mobile overlays ===== -->
+          <div class="m-rightrail m-only">
+            <button class="rx-btn" data-rx="❤️">❤️<small>3.3k</small></button>
+            <button class="rx-btn" title="Comments">💬<small>842</small></button>
+            <button class="rx-btn" title="Share">↗<small>Share</small></button>
+            <button class="rx-btn" id="mBagTop" title="Shop">🛍<small id="mBagCount">5</small></button>
+          </div>
+          <div class="m-chat m-only" id="mChat"></div>
+          <div class="m-swipe m-only" id="mSwipe">⌃ swipe up for full shop</div>
+          <div class="m-now m-only" id="mNow"></div>
+          <div class="m-input m-only">
+            <input class="input" placeholder="Say something…" id="mChatInput" />
+            <button class="m-bag" id="mBag">🛍 <span id="mBagCount2" class="tnum">5</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- up next -->
+      <div class="upnext">
+        <h3>▶ Up next in this show <span class="page-sub" style="font-weight:500">— queue builds urgency</span></h3>
+        <div class="queue" id="queue"></div>
+      </div>
+
+      <!-- shop grid -->
+      <div class="shop">
+        <div class="shop-head"><h3>Shop</h3><span class="page-sub" id="shopCount"></span></div>
+        <div class="pgrid" id="shopGrid"></div>
+      </div>
+    </div>
+
+    <!-- right rail: auction + chat (desktop) -->
+    <aside class="rail">
+      <div class="auction" id="auctionPanel"></div>
+      <div class="chat">
+        <div class="chat-head"><h3>Live chat</h3><span class="sub">Be kind · no spam</span></div>
+        <div class="chat-list" id="chatList"></div>
+        <div class="chat-input">
+          <input class="input" placeholder="Say something…" id="chatInput" />
+          <div class="rx">
+            <button data-rx="❤️">❤️</button>
+            <button data-rx="🔥">🔥</button>
+          </div>
+          <button class="btn sm btn-primary" id="chatSend">Send</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- mobile shop bottom sheet -->
+  <div class="sheet-scrim" id="scrim"></div>
+  <div class="sheet" id="sheet">
+    <div class="grab"></div>
+    <div class="sheet-head"><h3 style="font:var(--type-h3)">Shop this stream</h3><div class="spacer" style="flex:1"></div><button class="icon-btn" id="sheetClose">✕</button></div>
+    <div class="sheet-body" id="sheetBody"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/live.js"></script>
+</body>
+</html>

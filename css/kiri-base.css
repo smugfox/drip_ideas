@@ -1,0 +1,156 @@
+/* ============================================================
+   kiri-base.css
+   Foundation borrowed from Kiri-TCG's design system:
+   the TOKEN ARCHITECTURE (space / radius / type scales, shadow,
+   [data-theme] mechanism, reset) and the framework-free component
+   primitives (.btn, .chip, .badge, .input, .switch, .stepper).
+   COLORS + FONTS are Drip's, not Kiri's — see the token block.
+   No frameworks, no shadcn — plain CSS custom properties.
+   ============================================================ */
+
+:root {
+  /* ---- Drip palette (dark-first prototype) ---------------- */
+  --ink:            #0B0C0F;   /* app background            */
+  --surface:        #14161B;   /* panels                    */
+  --surface-raised: #1C1F27;   /* raised panels / inputs    */
+  --well:           #0E1014;   /* insets / video letterbox  */
+  --border:         #262A33;
+  --border-strong:  #363C48;
+  --on-surface:       #F3F5F8;
+  --on-surface-muted: #99A1AF;
+  --on-surface-faint: #6B7280;
+
+  --brand:          #FFC93C;   /* Drip gold                 */
+  --brand-hover:    #FFD65C;
+  --on-brand:       #1A1206;
+  --brand-soft:     rgba(255,201,60,0.14);
+
+  --buy:            #2F6BFF;   /* Buy-now blue              */
+  --buy-hover:      #4B80FF;
+  --on-buy:         #FFFFFF;
+
+  --live:           #F0384B;   /* live / outbid red         */
+  --win:            #24C281;   /* winning green             */
+  --warn:           #F5A623;   /* countdown amber           */
+  --info:           #7DA2FF;
+
+  --scrim:          rgba(4,5,7,0.62);
+  --shadow-float:   0 12px 40px rgba(0,0,0,0.55);
+  --shadow-panel:   0 1px 0 rgba(255,255,255,0.03) inset, 0 8px 24px rgba(0,0,0,0.35);
+
+  /* ---- Kiri scales (reused verbatim) --------------------- */
+  --rounded-none: 0px;
+  --rounded-xs: 4px;  --rounded-sm: 8px;  --rounded-md: 12px;
+  --rounded-lg: 16px; --rounded-xl: 22px; --rounded-full: 9999px;
+
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px;
+  --space-4: 16px; --space-5: 24px; --space-6: 32px;
+  --space-7: 48px; --space-8: 64px; --space-9: 96px;
+
+  /* ---- Type: Kiri's scale STRUCTURE, Drip's sans font ---- */
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-head: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --type-display:  800 44px/1.08 var(--font-head);  --type-display-ls: -0.02em;
+  --type-h1:       800 32px/1.12 var(--font-head);  --type-h1-ls: -0.02em;
+  --type-h2:       700 24px/1.2  var(--font-head);  --type-h2-ls: -0.015em;
+  --type-h3:       700 18px/1.25 var(--font-head);  --type-h3-ls: -0.01em;
+  --type-h4:       600 15px/1.3  var(--font-head);
+  --type-body-lg:  400 17px/1.5  var(--font-body);
+  --type-body:     400 15px/1.5  var(--font-body);
+  --type-body-sm:  400 13px/1.45 var(--font-body);
+  --type-caption:  500 11px/1.35 var(--font-body); --type-caption-ls: 0.01em;
+  --type-label:    700 10px/1.3  var(--font-body); --type-label-ls: 0.06em;
+}
+
+/* ============ base reset (Kiri) ============ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { color-scheme: dark; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--ink);
+  color: var(--on-surface);
+  font: var(--type-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+  overflow-x: clip;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-body); color: inherit; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+.tnum { font-variant-numeric: tabular-nums; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; border: 3px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ============ buttons (Kiri primitive, Drip colors) ============ */
+.btn {
+  font: var(--type-body); font-weight: 600; border: none; cursor: pointer;
+  height: 42px; padding: 0 18px; border-radius: var(--rounded-sm);
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  white-space: nowrap; transition: background .15s, transform .06s, border-color .15s, opacity .15s;
+  user-select: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary   { background: var(--buy); color: var(--on-buy); }
+.btn-primary:hover { background: var(--buy-hover); }
+.btn-brand     { background: var(--brand); color: var(--on-brand); }
+.btn-brand:hover { background: var(--brand-hover); }
+.btn-secondary { background: transparent; color: var(--on-surface); border: 1px solid var(--border-strong); }
+.btn-secondary:hover { background: var(--surface-raised); border-color: var(--on-surface-faint); }
+.btn-ghost     { background: transparent; color: var(--on-surface-muted); }
+.btn-ghost:hover { background: var(--surface-raised); color: var(--on-surface); }
+.btn-win       { background: var(--win); color: #04170F; }
+.btn:disabled, .btn.is-disabled { background: var(--surface-raised); color: var(--on-surface-faint); cursor: not-allowed; transform: none; }
+.btn.sm { height: 34px; padding: 0 13px; font: var(--type-body-sm); font-weight: 600; }
+.btn.xs { height: 28px; padding: 0 10px; font: var(--type-caption); border-radius: var(--rounded-xs); }
+.btn.block { width: 100%; }
+
+/* ============ inputs (Kiri) ============ */
+.input {
+  font: var(--type-body); background: var(--surface-raised); color: var(--on-surface);
+  border: 1px solid var(--border); border-radius: var(--rounded-sm);
+  height: 42px; padding: 0 14px; width: 100%;
+}
+.input::placeholder { color: var(--on-surface-faint); }
+.input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft); }
+
+/* ============ chips & badges (Kiri) ============ */
+.chip {
+  font: var(--type-body-sm); font-weight: 600; background: var(--surface); color: var(--on-surface-muted);
+  border: 1px solid var(--border-strong); border-radius: var(--rounded-full);
+  padding: 7px 15px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  white-space: nowrap; transition: background .15s, color .15s, border-color .15s;
+}
+.chip:hover { color: var(--on-surface); border-color: var(--on-surface-faint); }
+.chip.selected { background: var(--on-surface); color: var(--ink); border-color: var(--on-surface); }
+.badge {
+  font: var(--type-label); letter-spacing: var(--type-label-ls); text-transform: uppercase;
+  border-radius: var(--rounded-xs); padding: 3px 7px; display: inline-flex; align-items: center; gap: 5px;
+  background: var(--surface-raised); color: var(--on-surface-muted);
+}
+.badge.live { background: var(--live); color: #fff; }
+.badge.brand { background: var(--brand); color: var(--on-brand); }
+.badge.soft { background: var(--brand-soft); color: var(--brand); }
+.badge.dark { background: rgba(0,0,0,0.6); color: #fff; backdrop-filter: blur(4px); }
+
+/* ============ switch (Kiri) ============ */
+.switch { width: 38px; height: 22px; border-radius: 11px; background: var(--border-strong); position: relative; border: none; cursor: pointer; flex: none; transition: background .15s; }
+.switch::after { content: ""; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; top: 2px; left: 2px; transition: left .15s; }
+.switch.on { background: var(--win); }
+.switch.on::after { left: 18px; }
+
+/* ============ stepper (Kiri) ============ */
+.stepper { display: inline-flex; align-items: stretch; background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--rounded-sm); height: 38px; overflow: hidden; }
+.stepper button { width: 34px; background: none; border: none; font-size: 18px; color: var(--on-surface-muted); cursor: pointer; }
+.stepper button:hover { background: var(--surface); color: var(--on-surface); }
+.stepper .q { min-width: 40px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-variant-numeric: tabular-nums; border-inline: 1px solid var(--border); }
+
+/* ============ spinner + motion ============ */
+.spin { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); border-top-color: currentColor; animation: rot .8s linear infinite; display: inline-block; }
+@keyframes rot { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
