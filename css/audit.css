@@ -1,0 +1,78 @@
+/* audit.css — document styling for the Drip UX audit page (built on kiri-base tokens) */
+
+.topbar-doc {
+  position: sticky; top: 0; z-index: 30;
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 22px;
+  background: color-mix(in srgb, var(--ink) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-doc .brand-img { height: 22px; width: auto; mix-blend-mode: screen; }
+.topbar-doc .tag { font: var(--type-label); letter-spacing: var(--type-label-ls); text-transform: uppercase;
+  color: var(--on-surface-faint); border: 1px solid var(--border-strong); border-radius: var(--rounded-full); padding: 3px 9px; }
+.topbar-doc .spacer { flex: 1; }
+.topbar-doc a.act { color: var(--brand); font-weight: 700; font-size: 13px; }
+.topbar-doc a.act:hover { text-decoration: underline; }
+
+.doc { max-width: 940px; margin: 0 auto; padding: 40px 24px 96px; }
+
+.doc header.hero { margin-bottom: 28px; }
+.eyebrow { font: var(--type-label); letter-spacing: var(--type-label-ls); text-transform: uppercase; color: var(--brand); }
+.doc h1 { font: var(--type-display); letter-spacing: var(--type-display-ls); margin: 8px 0 10px; }
+.doc .meta { color: var(--on-surface-muted); font-size: 14px; }
+.doc .meta b { color: var(--on-surface); }
+
+.callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--brand);
+  border-radius: var(--rounded-md); padding: 18px 20px; margin: 24px 0; font-size: 16px; line-height: 1.6; }
+.callout b { color: var(--brand); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 8px; }
+.pill { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700;
+  padding: 5px 11px; border-radius: var(--rounded-full); border: 1px solid var(--border-strong); color: var(--on-surface-muted); }
+.pill .dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot.p0 { background: var(--live); } .dot.p1 { background: var(--warn); }
+.dot.p2 { background: var(--info); } .dot.win { background: var(--win); }
+
+.doc h2 { font: var(--type-h2); letter-spacing: var(--type-h2-ls); margin: 40px 0 4px; display: flex; align-items: center; gap: 12px; }
+.doc h2 .sev { font: var(--type-label); letter-spacing: var(--type-label-ls); text-transform: uppercase;
+  padding: 4px 9px; border-radius: var(--rounded-xs); }
+.sev.p0 { background: color-mix(in srgb, var(--live) 18%, transparent); color: var(--live); }
+.sev.p1 { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+.sev.p2 { background: color-mix(in srgb, var(--info) 18%, transparent); color: var(--info); }
+.sev.win { background: color-mix(in srgb, var(--win) 18%, transparent); color: var(--win); }
+.doc .h2sub { color: var(--on-surface-muted); font-size: 14px; margin: 2px 0 18px; }
+
+.find { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rounded-md);
+  padding: 18px 20px; margin-bottom: 14px; border-left: 3px solid var(--border-strong); }
+.find.p0 { border-left-color: var(--live); }
+.find.p1 { border-left-color: var(--warn); }
+.find.p2 { border-left-color: var(--info); }
+.find.win { border-left-color: var(--win); }
+.find h3 { font: var(--type-h3); letter-spacing: var(--type-h3-ls); margin-bottom: 6px; }
+.find p { color: var(--on-surface-muted); line-height: 1.62; font-size: 15px; }
+.find p + p { margin-top: 8px; }
+.find .action { margin-top: 10px; font-size: 14px; color: var(--on-surface); }
+.find .action b { color: var(--brand); }
+.find code { background: var(--surface-raised); border: 1px solid var(--border); border-radius: 5px;
+  padding: 1px 6px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; color: var(--on-surface); }
+
+.build { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+.build .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rounded-md); padding: 18px 20px; }
+.build .card h4 { font: var(--type-h4); margin-bottom: 6px; }
+.build .card p { color: var(--on-surface-muted); font-size: 14px; line-height: 1.55; }
+.linkrow { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.linkrow a { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px;
+  padding: 12px 18px; border-radius: var(--rounded-sm); }
+.linkrow a.primary { background: var(--brand); color: var(--on-brand); }
+.linkrow a.ghost { background: transparent; color: var(--on-surface); border: 1px solid var(--border-strong); }
+.linkrow a:hover { opacity: .9; }
+
+.doc footer { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--border);
+  color: var(--on-surface-faint); font-size: 13px; line-height: 1.6; }
+
+@media (max-width: 640px) {
+  .doc { padding: 28px 16px 72px; }
+  .doc h1 { font: var(--type-h1); }
+  .build { grid-template-columns: 1fr; }
+}
