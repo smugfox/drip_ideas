@@ -263,6 +263,7 @@
   .stream-head { position:absolute; top:0; left:0; right:0; z-index:12; border:none; padding:14px 14px calc(24px);
     background: linear-gradient(180deg, rgba(0,0,0,.6), transparent); }
   .stream-head .sh-sub { color: rgba(255,255,255,.8); }
+  .stage .tl { top: 64px; left: 12px; }  /* clear the seller header on mobile */
   .stage-wrap { position:absolute; inset:0; padding:0; }
   .stage { border-radius:0; border:none; aspect-ratio:auto; height:100dvh; width:100%; }
   .upnext, .shop, .now-card, .stage .reactions { display:none; }
