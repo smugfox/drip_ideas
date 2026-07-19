@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Drip — Mobile / Vertical View</title>
+  <meta name="description" content="The Drip prototype on a phone — vertical live stream and discovery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/kiri-base.css?v=3" />
+  <style>
+    .topbar-doc { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 14px;
+      padding: 14px 22px; background: color-mix(in srgb, var(--ink) 88%, transparent); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border); }
+    .topbar-doc .brand-img { height: 22px; width: auto; mix-blend-mode: screen; }
+    .topbar-doc .tag { font: var(--type-label); letter-spacing: var(--type-label-ls); text-transform: uppercase;
+      color: var(--on-surface-faint); border: 1px solid var(--border-strong); border-radius: var(--rounded-full); padding: 3px 9px; }
+    .topbar-doc .spacer { flex: 1; }
+    .topbar-doc a.act { color: var(--brand); font-weight: 700; font-size: 13px; }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 36px 24px 80px; }
+    .head h1 { font: var(--type-h1); letter-spacing: var(--type-h1-ls); }
+    .head p { color: var(--on-surface-muted); margin-top: 6px; max-width: 640px; line-height: 1.55; }
+
+    .stage-row { display: flex; gap: 56px; justify-content: center; align-items: flex-start; flex-wrap: wrap; margin-top: 40px; }
+    .phone-col { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .phone {
+      width: 402px; height: 858px; background: #05060a; border-radius: 46px; padding: 10px;
+      box-shadow: 0 40px 90px rgba(0,0,0,.6), 0 0 0 2px #23272f, 0 0 0 8px #0c0e13;
+      position: relative;
+    }
+    .phone iframe { width: 100%; height: 100%; border: 0; border-radius: 38px; background: var(--ink); display: block; }
+    .phone-cap { font-weight: 700; font-size: 15px; }
+    .phone-cap span { display: block; color: var(--on-surface-muted); font-weight: 500; font-size: 12px; margin-top: 2px; }
+
+    .notes { margin-top: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .note { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rounded-md); padding: 14px 16px; }
+    .note b { display: block; font-size: 13px; margin-bottom: 3px; }
+    .note p { color: var(--on-surface-muted); font-size: 12.5px; line-height: 1.5; }
+    .hint { margin-top: 18px; color: var(--on-surface-faint); font-size: 13px; }
+
+    @media (max-width: 900px) { .notes { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) {
+      .phone { width: 340px; height: 726px; }
+      .stage-row { gap: 36px; }
+      .notes { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar-doc">
+    <img class="brand-img" src="https://www.dripshop.live/assets/privy-wallet-drip-logo-dark-DZd39wfp.png" alt="Drip" />
+    <span class="tag">Mobile view</span>
+    <span class="spacer"></span>
+    <a class="act" href="index.html">Desktop prototype →</a>
+  </header>
+
+  <main class="wrap">
+    <div class="head">
+      <h1>Drip on a phone — the vertical experience</h1>
+      <p>This is the same prototype, rendered at phone width so the layout flips to a full-screen vertical stream. Both frames below are live and interactive — bid, chat, and tap the 🛍 bag to open the shop sheet.</p>
+    </div>
+
+    <div class="stage-row">
+      <div class="phone-col">
+        <div class="phone"><iframe src="live.html?seller=Charmenic&id=charmenic" title="Live stream (mobile)"></iframe></div>
+        <div class="phone-cap">Live stream <span>vertical video · overlaid chat · pinned buy/bid</span></div>
+      </div>
+      <div class="phone-col">
+        <div class="phone"><iframe src="index.html" title="Discovery (mobile)"></iframe></div>
+        <div class="phone-cap">Discovery <span>filters · scrollable rows · bottom tab bar</span></div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="note"><b>Full-screen video</b><p>The stream fills the screen — no wasted space, TikTok/Whatnot style.</p></div>
+      <div class="note"><b>Chat overlaid</b><p>Live chat sits over the bottom of the video, never hidden behind a button.</p></div>
+      <div class="note"><b>Buy / Bid in the thumb zone</b><p>The “selling now” + auction card is pinned bottom — one tap to bid or buy.</p></div>
+      <div class="note"><b>Shop as a bottom-sheet</b><p>Tap 🛍 to browse every lot without leaving the stream.</p></div>
+    </div>
+
+    <p class="hint">Tip: open <b>drip-ideas.vercel.app/live.html</b> directly on your phone to try it at true device size.</p>
+  </main>
+</body>
+</html>
