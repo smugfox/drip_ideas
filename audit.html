@@ -9,11 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/kiri-base.css?v=3" />
-  <link rel="stylesheet" href="css/audit.css?v=1" />
+  <link rel="stylesheet" href="css/audit.css?v=6" />
 </head>
 <body>
   <header class="topbar-doc">
-    <img class="brand-img" src="https://www.dripshop.live/assets/privy-wallet-drip-logo-dark-DZd39wfp.png" alt="Drip" />
+    <span class="logo-chip"><img class="brand-img" src="https://www.dripshop.live/assets/privy-wallet-drip-logo-dark-DZd39wfp.png" alt="Drip" /></span>
     <span class="tag">UX Audit</span>
     <span class="spacer"></span>
     <a class="act" href="index.html">View prototype →</a>
@@ -23,11 +23,15 @@
     <header class="hero">
       <div class="eyebrow">Product &amp; UX Review</div>
       <h1>Drip — a walkthrough &amp; where the leverage is</h1>
-      <p class="meta">An outside review of <b>dripshop.live</b>, July 2026 · reviewed logged-out and logged-in (Google), desktop + mobile. Paired with a clickable prototype of the highest-impact fixes.</p>
+      <p class="meta">An outside review of <b>dripshop.live</b>, July 2026 · reviewed logged-out and logged-in (Google), desktop + mobile. <b>Re-tested Jul 19 (logged-out)</b> — each finding below carries its current status. Paired with a clickable prototype of the highest-impact fixes.</p>
     </header>
 
     <div class="callout">
-      <b>Top-line:</b> the merchandising and brand craft are genuinely strong — the pack/box art, Instant Packs, and the in-stream shop. What holds the experience back is <b>perceived performance</b>, how thinly the <b>“live” and “social”</b> are merchandised on desktop, and a couple of <b>conversion taxes</b> in the buy path. Most of it is fixable without touching the core model.
+      <b>💡 Top-line:</b> the merchandising and brand craft are genuinely strong — the pack/box art, Instant Packs, and the in-stream shop. What holds the experience back is <b>perceived performance</b>, how thinly the <b>“live” and “social”</b> are merchandised on desktop, and a couple of <b>conversion taxes</b> in the buy path. Most of it is fixable without touching the core model.
+    </div>
+
+    <div class="callout">
+      <b>🔄 Re-test, Jul 19:</b> the team ships fast — the P0 no longer reproduces, Home is far richer, and the free-pack pitch now appears in-stream. But the core conversion gaps hold: chat is still hidden behind a “Comment” button on desktop, login still buries Google/Apple, the Live page is still one sparse row, and deep links still 404.
     </div>
 
     <div class="legend">
@@ -42,9 +46,10 @@
     <p class="h2sub">Potentially silent churn. Worth a quick internal test before anything else.</p>
 
     <div class="find p0">
-      <h3>Pages can hang when an ad blocker is on</h3>
+      <h3>Pages can hang when an ad blocker is on <span class="status fixed">✓ resolved Jul 19</span></h3>
       <p>Browsing with AdGuard active, <code>/streams/home</code> (the Home tab) and the <b>Marketplace</b> hung on blank spinners (15s+). The console showed Statsig’s feature-flag call (<code>featureassets.org</code>) blocked, while the GraphQL socket itself connected fine. Instant Packs and live streams loaded normally — so it’s <b>not universal</b>, but a meaningful slice of the collector/gamer audience runs ad blockers.</p>
       <p class="action"><b>Action:</b> load the site in a profile with no ad blocker (or allowlist <code>featureassets.org</code>). If Home/Marketplace still hang, it’s real — the fix is to not gate first render on third-party scripts a chunk of users block.</p>
+      <p class="update"><b>Re-test:</b> fixed — and stress-tested in the wild: Statsig’s call was returning <code>HTTP 500</code> for <i>everyone</i> during our pass, yet Home and Marketplace rendered fine. First render is no longer gated on the third-party script. (Their feature-flag service erroring is their vendor’s problem now, not their users’.)</p>
     </div>
 
     <!-- P1 -->
@@ -52,24 +57,32 @@
     <p class="h2sub">Where sign-ups and first purchases leak.</p>
 
     <div class="find p1">
-      <h3>No “free pack” payoff after signup</h3>
+      <h3>No “free pack” payoff after signup <span class="status partial">partially addressed</span></h3>
       <p>The entire logged-out pitch is <i>“Sign up &amp; rip a free pack — no payment info required.”</i> After signing in with Google, I was dropped straight back on the grid — no onboarding, no “here’s your free pack,” no next step. <b>The single biggest promise of the funnel has no landing moment.</b></p>
+      <p class="update"><b>Re-test:</b> the pitch is now merchandised harder — logged-out stream pages carry a “Join Drip &amp; rip a free pack” panel (below) with a 3-step “how it works.” Whether the post-signup <i>payoff moment</i> now exists couldn’t be verified without creating an account — but the promise is bigger than ever, which raises the stakes on landing it. Our <a href="onboarding.html">coded onboarding prototype</a> shows exactly that missing moment.</p>
+      <div class="shot narrow"><img src="img/audit-freepack.png" alt="Drip's new in-stream free pack signup panel" /><span class="cap">Jul 19 — the free-pack pitch now shown in-stream to logged-out visitors (signup → rip → keep collecting).</span></div>
     </div>
 
     <div class="find p1">
-      <h3>Stored-value wallet + a 2% deposit fee is a real conversion tax</h3>
+      <h3>Stored-value wallet + a 2% deposit fee is a real conversion tax <span class="status unknown">not re-verified</span></h3>
       <p>To buy one $11.77 pack, a new user must first <b>pre-load a balance</b> (min $5), and the fine print reads: <i>“you pay credit + a 2% processing fee; only the credit is added to your balance.”</i> So a first-time buyer pays a fee <b>just to fund the purchase</b> — a trust/friction wall before the first transaction.</p>
       <p class="action"><b>Worth discussing:</b> pay-as-you-go for the first purchase, with the wallet as an opt-in power-user feature.</p>
     </div>
 
     <div class="find p1">
-      <h3>The “live/social” is invisible on desktop</h3>
+      <h3>The “live/social” is invisible on desktop <span class="status still">still true</span></h3>
       <p>Inside a stream, the video floats in the center with ~40% of the screen wasted as blurred dead space on each side, and <b>live chat is collapsed by default</b> behind a “Comment” button. The energy that sells the format — chat, reactions, what’s selling now — isn’t visible to a browsing visitor.</p>
+      <p class="update"><b>Re-test:</b> the stream page was redesigned (right-rail signup panel, in-stream shop below, picture-in-picture mini-player on scroll) — but <b>chat is still behind a “Comment” button</b> and the dead space remains. The room also rendered with a large blank region below the video in our pass — worth a look as a layout bug.</p>
+      <div class="shots2">
+        <div class="shot"><img src="img/audit-stream-before.jpg" alt="Drip's live stream room today: video boxed by blurred dead space, chat behind a Comment button" /><span class="cap"><b>Live today</b> — video boxed by blurred dead space; chat collapsed behind a “Comment” pill; no auction state visible.</span></div>
+        <div class="shot"><img src="img/audit-stream-after.jpg" alt="Prototype live room: persistent chat rail, always-on auction module, up-next queue" /><span class="cap"><b>Proposed (prototype)</b> — persistent chat rail, always-on auction module (countdown · quick-bid · history), up-next queue.</span></div>
+      </div>
     </div>
 
     <div class="find p1">
-      <h3>Login buries Google / Apple</h3>
+      <h3>Login buries Google / Apple <span class="status still">still true</span></h3>
       <p>The auth modal leads with <b>Phone (SMS)</b> and <b>Connect Wallet</b>; Google/Apple/Facebook are hidden under “Other Login Options” — extra taps for a mainstream collectibles buyer.</p>
+      <p class="update"><b>Re-test:</b> unchanged — Phone + Connect Wallet first, everything else behind “Other Login Options.”</p>
     </div>
 
     <!-- P2 -->
@@ -77,28 +90,34 @@
     <p class="h2sub">Cheap wins that lift the whole feel.</p>
 
     <div class="find p2">
-      <h3>Slow images, no skeletons on the main grids</h3>
+      <h3>Slow images, no skeletons on the main grids <span class="status unknown">not re-verified</span></h3>
       <p>Instant Packs, Live Streams, and the in-stream Shop render as gray/black boxes for ~4–5s before the (great) art loads — first impression reads “broken/empty.” Notably, the <b>Marketplace already uses proper skeleton loaders</b> — the pattern exists in the codebase; it just needs to be applied consistently.</p>
+      <p class="update"><b>Re-test:</b> pages and art loaded fast in our pass (good network) — couldn’t reproduce either way. Downgrade confidence; verify on a throttled connection.</p>
     </div>
 
     <div class="find p2">
-      <h3>Deep links &amp; refresh break</h3>
+      <h3>Deep links &amp; refresh break <span class="status still">still true</span></h3>
       <p>Direct URLs to <code>/home</code>, <code>/rewards</code>, and <code>/marketplace</code> all <b>404</b> (they redirect to <code>/streams/*</code>). Bad for SEO and for sharing a link to any top-level page. Hard refresh also reboots the whole app behind a full-screen spinner.</p>
+      <p class="update"><b>Re-test:</b> <code>/home</code> and <code>/rewards</code> still 404. Routes have also <i>moved without redirects</i>: Marketplace now lives at <code>/shop</code>, and the old <code>/streams/home</code> (the previous Home tab) now 404s too — yesterday’s shared links are today’s dead ends.</p>
     </div>
 
     <div class="find p2">
-      <h3>404 page breaks the theme</h3>
+      <h3>404 page breaks the theme <span class="status still">still true</span></h3>
       <p>It’s bright white in an otherwise dark app — a jarring flash.</p>
+      <p class="update"><b>Re-test:</b> unchanged — and with the route moves above, users are <i>more</i> likely to see it.</p>
+      <div class="shot"><img src="img/audit-404.jpg" alt="Drip's bright white 404 page" /><span class="cap">Jul 19 — the white 404, hit from a previously-valid deep link on the otherwise dark site.</span></div>
     </div>
 
     <div class="find p2">
-      <h3>The Live Streams page feels empty</h3>
+      <h3>The Live Streams page feels empty <span class="status still">still true</span></h3>
       <p>Only ~4 concurrent streams, one row, ~80% empty page, and <b>no category filters</b> (Instant Packs already has them). No “starting soon,” scheduled, replays, or live-preview thumbnails to fill it or aid discovery.</p>
+      <p class="update"><b>Re-test:</b> unchanged — 3 live streams, one “Happening Now” row, no filters, no schedule, no replays. The Home tab now merchandises streams much better (categories, featured, RSVP cards) — the Live tab deserves the same treatment.</p>
     </div>
 
     <div class="find p2">
-      <h3>The first-stream gate is heavy</h3>
+      <h3>The first-stream gate is heavy <span class="status unknown">not re-verified</span></h3>
       <p>Four manual checkboxes (including “purchases and bids are binding and final”) before you can watch your first stream.</p>
+      <p class="update"><b>Re-test:</b> no gate appeared when opening streams logged-out — likely logged-in only; not verified this pass.</p>
     </div>
 
     <!-- Strengths -->
@@ -108,6 +127,7 @@
     <div class="find win">
       <h3>Real assets to build on</h3>
       <p><b>Pack/box artwork</b> is excellent — vivid, on-brand, collectible-feeling. <b>Instant Packs</b> is smart, mobile-native merchandising with good category chips. The <b>in-stream Shop</b> is deep (31 products) and well-structured — clear Buy Now / Auction / Giveaway filters and pinned items. <b>Rewards (“Driplets”), referrals, and giveaways</b> give you the retention scaffolding. And <b>Google Pay</b> defaulted correctly after Google login.</p>
+      <p class="update"><b>Re-test:</b> add shipping velocity to this list — in two weeks the Home tab gained category chips, featured/RSVP stream cards and a live activity feed, the Marketplace got a “$1 Auctions” hook, and the stream page was redesigned. The team moves fast; the fixes above are well within reach.</p>
     </div>
 
     <!-- What we built -->
@@ -117,18 +137,44 @@
       <div class="card"><h4>Desktop live room</h4><p>Fills the dead side-space with a persistent chat rail + always-on Buy/Bid, a first-class auction module (countdown · quick-bid · bid history · anti-snipe), and an up-next queue.</p></div>
       <div class="card"><h4>Live discovery</h4><p>Category filters, Happening now, Starting soon (with reminders), a personalized For you row, and Replays — instead of one sparse row.</p></div>
       <div class="card"><h4>Mobile live</h4><p>Full-screen vertical video with overlaid chat, a pinned buy/bid card in the thumb zone, and a shop bottom-sheet.</p></div>
-      <div class="card"><h4>Free-pack onboarding <span style="color:var(--on-surface-faint);font-weight:500">(wireframed)</span></h4><p>The missing post-signup moment: claim → pick what you collect → rip → your pull → drop into a live show.</p></div>
+      <div class="card"><h4>Free-pack onboarding</h4><p>The missing post-signup moment, fully coded: claim → pick what you collect → press-and-hold to rip → your pull (click to enlarge) → drop into a live show. Pairs with the free-pack pitch Drip now runs in-stream.</p></div>
     </div>
 
     <div class="linkrow">
       <a class="primary" href="index.html">Open the clickable prototype →</a>
       <a class="ghost" href="live.html?seller=Charmenic&id=charmenic">See the live room &amp; auction →</a>
+      <a class="ghost" href="onboarding.html">Try the free-pack onboarding →</a>
       <a class="ghost" href="mobile.html">See it on mobile →</a>
     </div>
 
     <footer>
-      Prototype &amp; findings prepared on Drip’s live site, July 2026. The prototype is a design exploration (no backend — bids, chat, and other viewers are simulated). Built framework-free in plain HTML/CSS/JS.
+      Prototype &amp; findings prepared on Drip’s live site, July 2026; findings re-tested Jul 19, 2026 (logged-out pass). The prototype is a design exploration (no backend — bids, chat, and other viewers are simulated). Built framework-free in plain HTML/CSS/JS.
     </footer>
   </main>
+
+  <!-- click-to-enlarge overlay for screenshots -->
+  <div class="lightbox-doc" id="lightbox" role="dialog" aria-label="Enlarged screenshot">
+    <img id="lightbox-img" alt="" />
+    <span class="lb-cap" id="lightbox-cap"></span>
+  </div>
+  <script>
+    (function () {
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lightbox-img');
+      var lbCap = document.getElementById('lightbox-cap');
+      document.querySelectorAll('.shot').forEach(function (shot) {
+        shot.addEventListener('click', function () {
+          var img = shot.querySelector('img');
+          var cap = shot.querySelector('.cap');
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lbCap.textContent = cap ? cap.textContent + ' · Click anywhere or press Esc to close' : '';
+          lb.classList.add('open');
+        });
+      });
+      lb.addEventListener('click', function () { lb.classList.remove('open'); });
+      window.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('open'); });
+    })();
+  </script>
 </body>
 </html>

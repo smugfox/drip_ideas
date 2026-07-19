@@ -20,6 +20,7 @@ Vercel project **drip-ideas** (team "Robin's projects"), git-connected to this r
 |---|---|
 | Discovery (desktop entry) | https://drip-ideas.vercel.app/ |
 | Live room + auction | https://drip-ideas.vercel.app/live.html |
+| Free-pack onboarding | https://drip-ideas.vercel.app/onboarding.html |
 | Mobile / vertical preview | https://drip-ideas.vercel.app/mobile.html |
 | UX audit (shareable) | https://drip-ideas.vercel.app/audit.html |
 
@@ -42,9 +43,21 @@ frame id 9:2, with real screenshots).
 - `live.html` — Live room. Desktop: video stage + persistent chat rail + **auction module** +
   up-next queue + shop. Mobile (≤1024px): full-screen vertical video, overlaid chat, pinned
   buy/bid card, shop bottom-sheet. Logic: `js/live.js`.
-- `mobile.html` — renders `live.html` + `index.html` inside phone-frame iframes (so the
-  responsive mobile layout is viewable on desktop).
-- `audit.html` + `css/audit.css` — the shareable audit doc (dark, Drip-themed).
+- `onboarding.html` — post-signup free-pack onboarding (Figma frame C, built): claim →
+  "what do you collect?" chips → hold-to-rip (pointer-hold w/ progress + pack-tear) →
+  pull reveal → routes into a live show matching the picked category. Logic:
+  `js/onboarding.js`. Saves picks to `localStorage.drip_interests`. Entry: gold
+  "🎁 Free pack" pill in the Discovery topbar.
+- `mobile.html` — renders `live.html` + `index.html` + `onboarding.html` inside
+  phone-frame iframes (so the responsive mobile layout is viewable on desktop).
+- `audit.html` + `css/audit.css` (`?v=6`) — the shareable audit doc. Deliberately styled as a
+  **light, Notion-like document** (system font, hairline dividers, pastel tags, gray callouts) —
+  NOT the app's dark skin; it reads as a memo about the app. Screenshots are click-to-enlarge
+  (inline lightbox script in audit.html).
+  Findings re-tested Jul 19 (logged-out): each finding carries a status chip
+  (resolved / still true / partial / not re-verified). P0 resolved (Statsig 500s but pages
+  render); chat-behind-Comment, login ordering, sparse Live page, deep-link 404s all still true.
+  Screenshots: `img/audit-404.jpg`, `img/audit-freepack.png` (Drip's new in-stream free-pack pitch).
 - `css/kiri-base.css` — Kiri-derived tokens + primitives (Drip colors).
 - `css/drip.css` — the Drip skin + all app components + responsive rules.
 - `js/data.js` — all mock data (streams, lots, chat, image URLs by name).
@@ -56,7 +69,8 @@ frame id 9:2, with real screenshots).
 - **Logo has a baked-in dark background** (it's the `logo-dark` asset). It's shown with
   **`mix-blend-mode: screen`** so the dark bg drops out on our dark surfaces. Don't remove that.
 - **Asset cache-busting:** CSS/JS links carry `?v=N`. **Bump the version when you edit a
-  shared CSS/JS file** or browsers serve stale copies (currently `drip.css?v=4`, others `?v=3`).
+  shared CSS/JS file** or browsers serve stale copies (currently `drip.css?v=10`, others `?v=3`,
+  `onboarding.js?v=5`).
 - **Auction engine** (`js/live.js`): live countdown, simulated rival bids, quick-bid, bid
   history, anti-snipe (timer extends if a bid lands in last 10s), winning/outbid states, buy-now
   lots, then advances through the lot queue. All simulated — no backend.
@@ -77,7 +91,8 @@ frame id 9:2, with real screenshots).
 - **Strengths:** pack/box art, Instant Packs, deep in-stream shop, Driplets/rewards, Google Pay.
 
 ## Open TODOs / next ideas
-- Build the **free-pack onboarding** screen into the coded prototype (only wireframed as Figma frame C).
+- ~~Build the **free-pack onboarding** screen into the coded prototype~~ ✅ done — `onboarding.html`
+  (hold-to-rip is time-based via rAF timestamps, so it fills in ~1s on any refresh rate).
 - Add a **mobile before/after row** to the Figma board.
 - Give **seller avatars** real images (currently gradient placeholders).
 - Optionally add an "Audit" link into the prototype's own nav.

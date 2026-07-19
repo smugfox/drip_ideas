@@ -10,6 +10,9 @@ built for a founder conversation. Two screens, responsive desktop + mobile.
   anti-snipe extension, winning/outbid states), an *up-next* queue, and a shop.
   On mobile it becomes a full-screen vertical video with overlaid chat, a pinned buy/bid
   card, and a shop bottom-sheet.
+- **`onboarding.html`** — Post-signup **free-pack onboarding**: claim a free pack, pick
+  what you collect, **press-and-hold to rip** it open, reveal the pull, then land in a
+  live show matched to your interests.
 
 ## Stack
 No frameworks. Plain **HTML + custom CSS + vanilla JS**.

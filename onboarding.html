@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Drip — Welcome (free pack)</title>
+  <meta name="description" content="Post-signup onboarding — claim a free pack, pick what you collect, rip it, and land in a live show." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/kiri-base.css?v=3" />
+  <link rel="stylesheet" href="css/drip.css?v=10" />
+</head>
+<body class="onb-body">
+  <div class="onb-glow" aria-hidden="true"></div>
+
+  <header class="onb-top">
+    <div class="logo">
+      <img class="brand-img" src="https://www.dripshop.live/assets/privy-wallet-drip-logo-dark-DZd39wfp.png" alt="Drip" />
+      <span class="tag">proto</span>
+    </div>
+    <div class="onb-progress">
+      <span class="onb-stepnum" id="stepnum">Step 1 of 4</span>
+      <div class="onb-dots" id="dots"><i class="on"></i><i></i><i></i><i></i></div>
+    </div>
+  </header>
+
+  <main class="onb">
+    <!-- 1 · claim -->
+    <section class="onb-step is-active" data-step="1">
+      <div class="onb-eyebrow"><span class="badge soft">✓ Account created</span></div>
+      <h1>Welcome to Drip 🎉<br />Here&rsquo;s a free pack, on us.</h1>
+      <div class="onb-pack onb-pack-float">
+        <span class="badge brand free-tag">Free</span>
+        <img id="pack-img-1" alt="Your free booster pack" />
+      </div>
+      <p class="onb-sub">No payment info needed. Rip it and keep whatever you pull.</p>
+      <button class="btn btn-brand block onb-cta" id="claim">Claim my free pack</button>
+      <p class="onb-hint">Takes 20 seconds</p>
+    </section>
+
+    <!-- 2 · interests -->
+    <section class="onb-step" data-step="2">
+      <h1>What do you collect?</h1>
+      <div class="onb-chips" id="cats"></div>
+      <p class="onb-sub">Pick a few — we&rsquo;ll tailor your live shows &amp; feed.</p>
+      <button class="btn btn-brand block onb-cta" id="continue">Skip for now</button>
+    </section>
+
+    <!-- 3 · rip -->
+    <section class="onb-step" data-step="3">
+      <h1>Rip it!</h1>
+      <div class="rip-pack" id="rip-pack">
+        <div class="half rip-top"><img id="pack-img-3a" alt="" /></div>
+        <div class="half rip-bot"><img id="pack-img-3b" alt="Your free booster pack" /></div>
+        <div class="rip-line" aria-hidden="true"></div>
+      </div>
+      <p class="onb-sub">Press &amp; hold to tear open your pack.</p>
+      <button class="btn btn-brand block onb-cta btn-rip" id="rip">
+        <span class="fill" id="rip-fill"></span>
+        <span class="lbl" id="rip-lbl">Hold to rip →</span>
+      </button>
+    </section>
+
+    <!-- 4 · the pull -->
+    <section class="onb-step" data-step="4">
+      <h1>Nice pull! ✨<br />It&rsquo;s in your collection.</h1>
+      <div class="onb-card" id="reveal" title="Click to enlarge">
+        <img id="card-img" alt="Your pulled card" />
+        <div class="shine" aria-hidden="true"></div>
+      </div>
+      <div class="onb-pull-meta">
+        <span class="p-name" id="pull-name"></span>
+        <span class="badge soft" id="pull-value"></span>
+      </div>
+      <p class="onb-sub">Ship it, hold it, or list it — it&rsquo;s yours to keep.</p>
+      <button class="btn btn-brand block onb-cta" id="watch">Watch a live show →</button>
+      <p class="onb-hint" id="watch-sub"></p>
+      <button class="btn btn-secondary block" id="sellers-toggle" style="margin-top:10px">Follow suggested sellers</button>
+      <div class="onb-sellers" id="sellers"></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- click-to-enlarge overlay for the pulled card -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged card">
+    <img id="lightbox-img" alt="Your pulled card, enlarged" />
+    <span class="lb-hint">Click anywhere or press Esc to close</span>
+  </div>
+
+  <script src="js/data.js?v=3"></script>
+  <script src="js/onboarding.js?v=5"></script>
+</body>
+</html>

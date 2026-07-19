@@ -232,6 +232,9 @@
 
 /* mobile-only pieces hidden on desktop */
 .m-only { display:none; }
+/* the shop bottom-sheet + scrim exist only on mobile — without this they'd
+   render as unstyled static content at the bottom of the desktop page */
+.sheet-scrim, .sheet { display:none; }
 
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 1200px) {
@@ -295,7 +298,7 @@
   .m-acard .r2 .btn { flex:1; }
 
   /* mobile shop bottom sheet */
-  .sheet-scrim { position:fixed; inset:0; background: var(--scrim); z-index:60; opacity:0; pointer-events:none; transition:opacity .2s; }
+  .sheet-scrim { display:block; position:fixed; inset:0; background: var(--scrim); z-index:60; opacity:0; pointer-events:none; transition:opacity .2s; }
   .sheet-scrim.open { opacity:1; pointer-events:auto; }
   .sheet { position:fixed; left:0; right:0; bottom:0; z-index:61; background: var(--surface); border-radius: var(--rounded-xl) var(--rounded-xl) 0 0; border-top:1px solid var(--border-strong); max-height:78dvh; transform: translateY(100%); transition: transform .25s; display:flex; flex-direction:column; }
   .sheet.open { transform: translateY(0); }
@@ -311,4 +314,114 @@
   .page-title { font: var(--type-h2); }
   .topbar { padding: 12px 14px; }
   .topbar .token-pill, .topbar .balance .lbl { display:none; }
+}
+
+/* ===================== ONBOARDING (free pack) ===================== */
+/* Post-signup flow (onboarding.html): claim → interests → rip → reveal. */
+.onb-body { min-height: 100dvh; display: flex; flex-direction: column; }
+.onb-glow { position: fixed; inset: 0; pointer-events: none; z-index: 0; background:
+  radial-gradient(48% 36% at 50% 0%, rgba(255,201,60,.09), transparent 70%),
+  radial-gradient(40% 34% at 10% 90%, rgba(124,58,237,.14), transparent 70%),
+  radial-gradient(36% 30% at 90% 86%, rgba(47,107,255,.10), transparent 70%); }
+.onb-top { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 18px 26px; }
+.onb-top .logo { padding: 0; }
+.onb-progress { display: flex; align-items: center; gap: 12px; }
+.onb-stepnum { font: var(--type-caption); letter-spacing: var(--type-caption-ls); font-weight: 600; color: var(--on-surface-muted); }
+.onb-dots { display: flex; gap: 6px; }
+.onb-dots i { width: 22px; height: 4px; border-radius: 99px; background: var(--border-strong); transition: background .25s; }
+.onb-dots i.on { background: var(--brand); }
+
+.onb { position: relative; z-index: 1; flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 20px 56px; }
+.onb-step { display: none; width: 100%; max-width: 430px; flex-direction: column; align-items: center; text-align: center; }
+.onb-step.is-active { display: flex; animation: onbIn .38s cubic-bezier(.2,.7,.3,1); }
+@keyframes onbIn { from { opacity: 0; transform: translateY(14px); } }
+.onb-step h1 { font: var(--type-h1); letter-spacing: var(--type-h1-ls); }
+.onb-eyebrow { margin-bottom: 14px; }
+.onb-sub { color: var(--on-surface-muted); margin-top: 16px; line-height: 1.55; max-width: 340px; }
+.onb-cta { margin-top: 22px; width: 100%; }
+.onb-hint { font: var(--type-caption); color: var(--on-surface-faint); margin-top: 10px; }
+
+/* the pack (die-cut transparent PNG — contain + drop-shadow, no box frame) */
+.onb-pack { position: relative; width: 200px; aspect-ratio: 15/22; margin-top: 26px; }
+.onb-pack > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 22px 34px rgba(0,0,0,.55)); }
+.onb-pack .free-tag { position: absolute; top: 6px; right: -6px; z-index: 2; }
+.onb-pack-float { animation: packFloat 3.6s ease-in-out infinite; }
+@keyframes packFloat { 50% { transform: translateY(-8px); } }
+
+/* step 3: hold-to-rip — pack rendered as two clipped halves */
+.rip-pack { position: relative; width: 200px; aspect-ratio: 15/22; margin-top: 26px; --shake: 0; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.rip-pack .half { position: absolute; inset: 0; }
+.rip-pack .half img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none;
+  filter: drop-shadow(0 16px 26px rgba(0,0,0,.5)); }
+.rip-top { clip-path: inset(0 0 72% 0); transition: transform .55s cubic-bezier(.3,.6,.3,1), opacity .55s; z-index: 2; }
+.rip-bot { clip-path: inset(28% 0 0 0); }
+.rip-line { position: absolute; left: -5%; right: -5%; top: 28%; border-top: 2px dashed rgba(255,255,255,.55); opacity: 0; transition: opacity .2s; z-index: 3; }
+.rip-pack.holding { animation: ripShake .12s infinite; cursor: grabbing; }
+.rip-pack.holding .rip-line { opacity: .9; }
+@keyframes ripShake {
+  25% { transform: translate(calc(var(--shake)*1px), calc(var(--shake)*-1px)) rotate(calc(var(--shake)*.25deg)); }
+  75% { transform: translate(calc(var(--shake)*-1px), calc(var(--shake)*1px)) rotate(calc(var(--shake)*-.25deg)); }
+}
+.rip-pack.ripped .rip-top { transform: translate(-36px,-110px) rotate(-20deg); opacity: 0; }
+.rip-pack.ripped .rip-line { opacity: 0; }
+
+/* hold-to-rip button with progress fill */
+.btn-rip { position: relative; overflow: hidden; touch-action: none; }
+.btn-rip .fill { position: absolute; inset: 0; width: 0%; background: rgba(255,255,255,.34); pointer-events: none; }
+.btn-rip .lbl { position: relative; z-index: 1; }
+
+/* sparkle burst */
+.spark { position: absolute; left: 50%; top: 34%; font-size: 16px; pointer-events: none; z-index: 6; animation: sparkFly .9s ease-out forwards; }
+@keyframes sparkFly {
+  from { transform: translate(-50%,-50%) scale(.4); opacity: 1; }
+  to   { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.15) rotate(40deg); opacity: 0; }
+}
+
+/* step 4: the pull (die-cut transparent PNG — silhouette floats, gold glow, no crop) */
+.onb-card { position: relative; width: 200px; margin-top: 26px; cursor: zoom-in;
+  filter: drop-shadow(0 18px 50px rgba(255,201,60,.28)) drop-shadow(0 8px 20px rgba(0,0,0,.5));
+  animation: cardIn .6s cubic-bezier(.2,.7,.3,1); transition: transform .22s cubic-bezier(.2,.7,.3,1), filter .22s; }
+.onb-card:hover { transform: scale(1.05);
+  filter: drop-shadow(0 22px 60px rgba(255,201,60,.42)) drop-shadow(0 10px 24px rgba(0,0,0,.5)); }
+@keyframes cardIn { from { transform: scale(.55) rotate(-7deg); opacity: 0; } }
+.onb-card > img { display: block; width: 100%; height: auto; }
+.onb-card .shine { position: absolute; inset: 0; mix-blend-mode: screen;
+  background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.4) 47%, transparent 62%);
+  background-size: 250% 100%; background-position: 120% 0; animation: cardShine 2.2s ease-in-out .9s 2;
+  -webkit-mask: url('../img/pull-mega-charizard.png') center/contain no-repeat;
+  mask: url('../img/pull-mega-charizard.png') center/contain no-repeat; }
+@keyframes cardShine { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+.onb-pull-meta { margin-top: 16px; display: flex; align-items: center; gap: 10px; }
+.onb-pull-meta .p-name { font-weight: 700; }
+
+/* click-to-enlarge lightbox for the pulled card */
+.lightbox { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center;
+  background: rgba(4,5,7,.82); backdrop-filter: blur(8px); cursor: zoom-out;
+  opacity: 0; pointer-events: none; transition: opacity .22s; }
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox img { width: min(86vw, 460px); max-height: 88dvh; object-fit: contain;
+  filter: drop-shadow(0 34px 90px rgba(255,201,60,.30)); }
+.lightbox.open img { animation: lbPop .28s cubic-bezier(.2,.7,.3,1); }
+@keyframes lbPop { from { transform: scale(.6); opacity: 0; } }
+.lightbox .lb-hint { position: absolute; bottom: 22px; left: 0; right: 0; text-align: center;
+  font: var(--type-caption); color: var(--on-surface-faint); }
+
+/* step 2: interest chips (brand-selected variant) */
+.onb-chips { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin-top: 24px; }
+.onb-chips .chip.selected { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
+
+/* step 4: suggested sellers */
+.onb-sellers { width: 100%; margin-top: 12px; display: none; flex-direction: column; gap: 8px; }
+.onb-sellers.open { display: flex; }
+.seller-row { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--rounded-md); padding: 10px 12px; text-align: left; }
+.seller-row .st-av { width: 34px; height: 34px; border-radius: 50%; flex: none; }
+.seller-row .s-name { font-weight: 700; font-size: 13px; }
+.seller-row .s-sub { font-size: 11px; color: var(--on-surface-faint); }
+.seller-row .spacer { flex: 1; }
+
+@media (max-width: 560px) {
+  .onb-step h1 { font: var(--type-h2); letter-spacing: var(--type-h2-ls); }
+  .onb-pack, .rip-pack, .onb-card { width: 168px; }
+  .onb-top { padding: 14px 18px; }
 }
