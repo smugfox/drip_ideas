@@ -16,7 +16,10 @@
   const known = [].concat(D.happeningNow, D.forYou).find((s) => s.id === p.get('id'));
   let viewers = known ? known.viewers : 312;
   $('#shName').textContent = seller;
-  $('#shAvatar').className = 'sh-av ' + grad(seller);
+  const avUrl = (n) => (D.avatars && D.avatars[n]) || null;
+  const avStyle = (n) => { const u = avUrl(n); return u ? `background-image:url('${u}');background-size:cover;background-position:center` : ''; };
+  if (avUrl(seller)) { $('#shAvatar').className = 'sh-av'; $('#shAvatar').style.cssText = avStyle(seller); }
+  else $('#shAvatar').className = 'sh-av ' + grad(seller);
   $('#shViewers').textContent = viewers;
 
   // put a real stream image behind the video stage
@@ -219,7 +222,10 @@
   function msgHTML(m) {
     const cls = m.sys ? 'system' : m.cls === 'buy' ? 'buy' : '';
     if (m.sys) return `<div class="msg system"><div class="m-body">${m.t}</div></div>`;
-    return `<div class="msg ${cls}"><span class="m-av st-av ${grad(m.u)}"></span><div class="m-body"><span class="m-name">${m.u}</span>${m.t}</div></div>`;
+    const av = avUrl(m.u)
+      ? `<span class="m-av st-av" style="${avStyle(m.u)}"></span>`
+      : `<span class="m-av st-av ${grad(m.u)}"></span>`;
+    return `<div class="msg ${cls}">${av}<div class="m-body"><span class="m-name">${m.u}</span>${m.t}</div></div>`;
   }
   function renderChat() {
     const full = msgs.map(msgHTML).join('');

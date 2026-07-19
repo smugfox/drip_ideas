@@ -133,8 +133,12 @@
     D.happeningNow.slice(0, 3).forEach((s) => {
       const row = document.createElement('div');
       row.className = 'seller-row';
+      const avUrl = D.avatars && D.avatars[s.seller];
+      const av = avUrl
+        ? `<span class="st-av" style="background-image:url('${avUrl}');background-size:cover;background-position:center"></span>`
+        : `<span class="st-av ${avatarGrad(s.seller)}"></span>`;
       row.innerHTML = `
-        <span class="st-av ${avatarGrad(s.seller)}"></span>
+        ${av}
         <span>
           <span class="s-name">${s.seller}</span><br/>
           <span class="s-sub">★ ${s.rating} · ${s.cat} · live now</span>

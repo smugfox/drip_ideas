@@ -69,7 +69,7 @@ frame id 9:2, with real screenshots).
 - **Logo has a baked-in dark background** (it's the `logo-dark` asset). It's shown with
   **`mix-blend-mode: screen`** so the dark bg drops out on our dark surfaces. Don't remove that.
 - **Asset cache-busting:** CSS/JS links carry `?v=N`. **Bump the version when you edit a
-  shared CSS/JS file** or browsers serve stale copies (currently `drip.css?v=10`, others `?v=3`,
+  shared CSS/JS file** or browsers serve stale copies (currently `drip.css?v=11`, others `?v=3`,
   `onboarding.js?v=5`).
 - **Auction engine** (`js/live.js`): live countdown, simulated rival bids, quick-bid, bid
   history, anti-snipe (timer extends if a bid lands in last 10s), winning/outbid states, buy-now
@@ -93,8 +93,12 @@ frame id 9:2, with real screenshots).
 ## Open TODOs / next ideas
 - ~~Build the **free-pack onboarding** screen into the coded prototype~~ ✅ done — `onboarding.html`
   (hold-to-rip is time-based via rAF timestamps, so it fills in ~1s on any refresh rate).
-- Add a **mobile before/after row** to the Figma board.
-- Give **seller avatars** real images (currently gradient placeholders).
+- ~~Add a **mobile before/after row** to the Figma board~~ ✅ done — row ③ in frame 9:2
+  ("Live today · Drip mobile app" = real App Store live-room screenshot; "Proposed" =
+  prototype mobile capture).
+- ~~Give **seller avatars** real images~~ ✅ done — `D.avatars` map in data.js hotlinks
+  real `cdn.dripshop.live/user-profile/*_thumbnail.jpg` images; gradient fallback for
+  unmapped names (chat randoms).
 - Optionally add an "Audit" link into the prototype's own nav.
 
 ## Run / deploy

@@ -23,6 +23,14 @@
 
   function avatarGrad(seed) { return D.grad(seed.split('').reduce((a, ch) => a + ch.charCodeAt(0), 0)); }
 
+  // real avatar image when we have one; gradient placeholder otherwise
+  function avSpan(seller, cls = 'st-av') {
+    const url = D.avatars && D.avatars[seller];
+    return url
+      ? `<span class="${cls}" style="background-image:url('${url}');background-size:cover;background-position:center"></span>`
+      : `<span class="${cls} ${avatarGrad(seller)}"></span>`;
+  }
+
   // ---- a live/recommended stream card ----
   function streamCard(s, opts = {}) {
     const el = document.createElement('div');
@@ -42,8 +50,8 @@
       : opts.soon ? `Starts in ${s.in}`
         : `★ ${s.rating} · ${s.viewers} watching`;
     const avatar = isLive
-      ? `<span class="av-ring"><span class="st-av ${avatarGrad(s.seller)}"></span><span class="av-live">LIVE</span></span>`
-      : `<span class="st-av ${avatarGrad(s.seller)}"></span>`;
+      ? `<span class="av-ring">${avSpan(s.seller)}<span class="av-live">LIVE</span></span>`
+      : avSpan(s.seller);
     el.innerHTML = `
       <div class="thumb ${s.g}">
         <img class="thumb-img" src="${s.img}" loading="lazy" alt="" onerror="this.remove()" />

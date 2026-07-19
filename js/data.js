@@ -31,6 +31,27 @@ window.DRIP = (function () {
   };
   const stageBg = T[1]; // landscape card-wall shot for the video stage
 
+  // real seller avatars (cdn.dripshop.live user-profile thumbnails)
+  const AV = [
+    'https://cdn.dripshop.live/user-profile/2w6bZuj-J10VeZUr51iLg_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/DKCpvFP-X7rJHIOovYdZe_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/mf0kHV6_C_Ms9fzW3F-Bv_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/sKMyGuK_2NrlhW2MvCfLG_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/pmuf-52oWXednXcMKyAgo_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/UQ0IFWQ4HEbJY5-aFsrln_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/f3MVYJ4bMauL9NV56Angz_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/L1Lf5MlXqsZAEF00U1SYh_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/xzcUxFNDcysXmrcwHzWbh_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/qcmp_VgtHfucj4fUuNKBk_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/GDsD7fXqj-DXCiW1FcGba_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/b5fCZDZghDnvDnPoXDE6w_thumbnail.jpg',
+  ];
+  const avatars = {
+    Charmenic: AV[0], hue_jazz: AV[1], Ogodno: AV[2], ProfOakes: AV[3],
+    raregrails: AV[4], packfresh: AV[5], gumgum_go: AV[6], thevault: AV[7],
+    eveecards: AV[8], voltage: AV[9], dexfiller: AV[10], artfull: AV[11],
+  };
+
   const categories = ['All','Pokémon','One Piece','Sports','Figures','Sealed','Marvel','Influencer'];
 
   const happeningNow = [
@@ -86,5 +107,5 @@ window.DRIP = (function () {
   ];
 
   function grad(i){ return grads[i % grads.length]; }
-  return { categories, happeningNow, startingSoon, forYou, replays, lots, bidderNames, chatSeed, chatFiller, grad, stageBg };
+  return { categories, happeningNow, startingSoon, forYou, replays, lots, bidderNames, chatSeed, chatFiller, grad, stageBg, avatars };
 })();
