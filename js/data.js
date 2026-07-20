@@ -45,11 +45,16 @@ window.DRIP = (function () {
     'https://cdn.dripshop.live/user-profile/qcmp_VgtHfucj4fUuNKBk_thumbnail.jpg',
     'https://cdn.dripshop.live/user-profile/GDsD7fXqj-DXCiW1FcGba_thumbnail.jpg',
     'https://cdn.dripshop.live/user-profile/b5fCZDZghDnvDnPoXDE6w_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/q4r8sfVUigs2AZQ6AAt3V_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/jxdrKvOw7gqqOF-kd9Mcv_thumbnail.jpg',
+    'https://cdn.dripshop.live/user-profile/EfPr6DEh9UrzlO2MxB-r2_thumbnail.jpg',
   ];
   const avatars = {
     Charmenic: AV[0], hue_jazz: AV[1], Ogodno: AV[2], ProfOakes: AV[3],
     raregrails: AV[4], packfresh: AV[5], gumgum_go: AV[6], thevault: AV[7],
     eveecards: AV[8], voltage: AV[9], dexfiller: AV[10], artfull: AV[11],
+    snapcity: AV[12], holo_hunter: AV[13], figfanatic: AV[14],
+    midnightpulls: AV[11], shinyvault: AV[4], gradegeek: AV[6],
   };
 
   const categories = ['All','Pokémon','One Piece','Sports','Figures','Sealed','Marvel','Influencer'];
@@ -59,6 +64,8 @@ window.DRIP = (function () {
     { id:'huejazz',   title:'Silver slabs & sealed — $1 start', seller:'hue_jazz', rating:4.8, viewers:184, cat:'One Piece', g:'g-red', img:T[1] },
     { id:'ogodno',    title:'Collector Friday · extra buyer goodies', seller:'Ogodno', rating:5.0, viewers:96, cat:'Sports', g:'g-teal', img:T[2] },
     { id:'oakes',     title:'Come see Baby Samson!!!', seller:'ProfOakes', rating:5.0, viewers:41, cat:'Figures', g:'g-gold', img:T[3] },
+    { id:'snapcity',  title:'Sealed Saturday — box after box', seller:'snapcity', rating:4.8, viewers:73, cat:'Sealed', g:'g-green', img:T[7] },
+    { id:'holohunter', title:'Marvel holo hunt — rare inserts', seller:'holo_hunter', rating:4.9, viewers:58, cat:'Marvel', g:'g-blue', img:T[5] },
   ];
 
   const startingSoon = [
@@ -66,6 +73,8 @@ window.DRIP = (function () {
     { id:'s2', title:'Modern sealed rip battle', seller:'packfresh', in:'40m', cat:'Sealed', g:'g-green', img:T[5] },
     { id:'s3', title:'One Piece OP-09 case', seller:'gumgum_go', in:'1h', cat:'One Piece', g:'g-red', img:T[6] },
     { id:'s4', title:'Slab Sunday preview', seller:'thevault', in:'2h', cat:'Sports', g:'g-slate', img:T[7] },
+    { id:'s5', title:'Figure Friday warm-up', seller:'figfanatic', in:'3h', cat:'Figures', g:'g-pink', img:T[8] },
+    { id:'s6', title:'Midnight grails — $1 starts', seller:'midnightpulls', in:'4h', cat:'Pokémon', g:'g-purple', img:T[10] },
   ];
 
   const forYou = [
@@ -73,6 +82,8 @@ window.DRIP = (function () {
     { id:'f2', title:'Gold Pikachu hunt', seller:'voltage', rating:4.7, viewers:33, cat:'Pokémon', g:'g-gold', img:T[9] },
     { id:'f3', title:'151 master set night', seller:'dexfiller', rating:4.9, viewers:120, cat:'Pokémon', g:'g-purple', img:T[10] },
     { id:'f4', title:'Trainer gallery pulls', seller:'artfull', rating:4.6, viewers:22, cat:'Pokémon', g:'g-pink', img:T[11] },
+    { id:'f5', title:'Shiny vault openings', seller:'shinyvault', rating:4.8, viewers:44, cat:'Pokémon', g:'g-blue', img:T[2] },
+    { id:'f6', title:'Grade-worthy pulls only', seller:'gradegeek', rating:4.9, viewers:66, cat:'Pokémon', g:'g-red', img:T[6] },
   ];
 
   const replays = [
@@ -80,6 +91,8 @@ window.DRIP = (function () {
     { id:'r2', title:'hue_jazz — sealed marathon', seller:'hue_jazz', len:'1:02:40', g:'g-red', img:T[5] },
     { id:'r3', title:'Ogodno — sports slab sniping', seller:'Ogodno', len:'22:05', g:'g-teal', img:T[7] },
     { id:'r4', title:'voltage — gold rush', seller:'voltage', len:'35:18', g:'g-gold', img:T[9] },
+    { id:'r5', title:'ProfOakes — figure frenzy', seller:'ProfOakes', len:'41:22', g:'g-gold', img:T[10] },
+    { id:'r6', title:'eveecards — evolution night', seller:'eveecards', len:'58:03', g:'g-teal', img:T[11] },
   ];
 
   // Live room: the lot queue (mix of auctions + buy-now)

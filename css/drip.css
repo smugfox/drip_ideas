@@ -51,7 +51,7 @@
 .token-pill { display: inline-flex; align-items: center; gap: 5px; height: 38px; padding: 0 12px; border-radius: var(--rounded-full); background: var(--surface); border: 1px solid var(--border); font-weight: 700; }
 .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--g-slate,#3a3f4a); border: 1px solid var(--border-strong); overflow: hidden; }
 
-.content { padding: 26px; max-width: 1560px; width: 100%; }
+.content { padding: 26px; max-width: 1920px; width: 100%; }
 .page-title { font: var(--type-h1); letter-spacing: var(--type-h1-ls); }
 .page-sub { color: var(--on-surface-muted); margin-top: 4px; }
 
@@ -67,9 +67,8 @@
 .section-head .more { margin-left: auto; color: var(--on-surface-muted); font-weight: 600; cursor: pointer; }
 .section-head .more:hover { color: var(--brand); }
 
-/* card grid */
-.grid { display: grid; gap: 18px; grid-template-columns: repeat(4, 1fr); }
-.grid.g5 { grid-template-columns: repeat(5, 1fr); }
+/* card grid — fills whatever width is available */
+.grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); }
 
 /* stream card */
 .scard { cursor: pointer; }
@@ -238,7 +237,6 @@
 
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 1200px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
   .liveroom { grid-template-columns: 64px minmax(0,1fr) 340px; }
   .pgrid { grid-template-columns: repeat(2,1fr); }
 }
