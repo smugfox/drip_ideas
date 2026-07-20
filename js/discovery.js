@@ -91,11 +91,46 @@
     box.innerHTML = '';
     const items = list.filter(matches);
     if (!items.length) {
-      box.innerHTML = `<div class="page-sub" style="grid-column:1/-1;padding:8px 0">No ${active} shows here right now — try another category.</div>`;
+      box.innerHTML = `<div class="page-sub" style="width:70vw;padding:8px 0">No ${active} shows here right now — try another category.</div>`;
+      if (box._updateCar) box._updateCar();
       return;
     }
-    items.forEach((s) => box.appendChild(streamCard(s, opts)));
+    // cycle the cards so the rail stays full and scrollable on wide screens
+    const MIN = 10;
+    const display = items.length >= MIN ? items
+      : Array.from({ length: MIN }, (_, i) => items[i % items.length]);
+    display.forEach((s) => box.appendChild(streamCard(s, opts)));
+    if (box._updateCar) box._updateCar();
   }
+
+  // ---- carousel chevrons + edge fade ----
+  function setupCarousel(id) {
+    const grid = $('#' + id);
+    const wrap = grid.parentElement;
+    if (!wrap || !wrap.classList.contains('car-wrap')) return;
+    const mk = (dir) => {
+      const b = document.createElement('button');
+      b.className = 'car-btn ' + (dir < 0 ? 'prev' : 'next');
+      b.innerHTML = dir < 0 ? '‹' : '›';
+      b.setAttribute('aria-label', dir < 0 ? 'Scroll back' : 'More shows');
+      b.onclick = () => grid.scrollBy({ left: dir * grid.clientWidth * 0.8, behavior: 'smooth' });
+      wrap.appendChild(b);
+      return b;
+    };
+    const prev = mk(-1);
+    const next = mk(1);
+    const update = () => {
+      const max = grid.scrollWidth - grid.clientWidth;
+      prev.classList.toggle('hidden', grid.scrollLeft <= 4);
+      next.classList.toggle('hidden', grid.scrollLeft >= max - 4);
+      wrap.classList.toggle('at-end', grid.scrollLeft >= max - 4);
+    };
+    grid.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    grid._updateCar = update;
+    update();
+  }
+  ['happening', 'soon', 'foryou', 'replays'].forEach(setupCarousel);
 
   function renderAll() {
     fill('happening', D.happeningNow, {});

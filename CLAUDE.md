@@ -69,7 +69,7 @@ frame id 9:2, with real screenshots).
 - **Logo has a baked-in dark background** (it's the `logo-dark` asset). It's shown with
   **`mix-blend-mode: screen`** so the dark bg drops out on our dark surfaces. Don't remove that.
 - **Asset cache-busting:** CSS/JS links carry `?v=N`. **Bump the version when you edit a
-  shared CSS/JS file** or browsers serve stale copies (currently `drip.css?v=12`, others `?v=3`,
+  shared CSS/JS file** or browsers serve stale copies (currently `drip.css?v=13`, others `?v=3`,
   `onboarding.js?v=5`).
 - **Auction engine** (`js/live.js`): live countdown, simulated rival bids, quick-bid, bid
   history, anti-snipe (timer extends if a bid lands in last 10s), winning/outbid states, buy-now
