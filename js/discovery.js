@@ -95,8 +95,9 @@
       if (box._updateCar) box._updateCar();
       return;
     }
-    // cycle the cards so the rail stays full and scrollable on wide screens
-    const MIN = 10;
+    // cycle the cards so the rail stays full and scrollable at any viewport width
+    const railW = box.clientWidth || window.innerWidth;
+    const MIN = Math.max(10, Math.ceil(railW / 318) + 3);
     const display = items.length >= MIN ? items
       : Array.from({ length: MIN }, (_, i) => items[i % items.length]);
     display.forEach((s) => box.appendChild(streamCard(s, opts)));
