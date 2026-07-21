@@ -31,13 +31,12 @@
     </div>
 
     <div class="callout">
-      <b>🔄 Re-test, Jul 19:</b> the team ships fast — the P0 no longer reproduces, Home is far richer, and the free-pack pitch now appears in-stream. But the core conversion gaps hold: chat is still hidden behind a “Comment” button on desktop, login still buries Google/Apple, the Live page is still one sparse row, and deep links still 404.
+      <b>🔄 Re-test, Jul 19:</b> the team ships fast — the P0 no longer reproduces, Home is far richer, and the free-pack pitch now appears in-stream. But the core conversion gaps hold: chat is still hidden behind a “Comment” button on desktop, and login still buries Google/Apple.
     </div>
 
     <div class="legend">
       <span class="pill"><span class="dot p0"></span> P0 · reliability</span>
       <span class="pill"><span class="dot p1"></span> P1 · conversion</span>
-      <span class="pill"><span class="dot p2"></span> P2 · polish</span>
       <span class="pill"><span class="dot win"></span> strengths</span>
     </div>
 
@@ -83,41 +82,6 @@
       <h3>Login buries Google / Apple <span class="status still">still true</span></h3>
       <p>The auth modal leads with <b>Phone (SMS)</b> and <b>Connect Wallet</b>; Google/Apple/Facebook are hidden under “Other Login Options” — extra taps for a mainstream collectibles buyer.</p>
       <p class="update"><b>Re-test:</b> unchanged — Phone + Connect Wallet first, everything else behind “Other Login Options.”</p>
-    </div>
-
-    <!-- P2 -->
-    <h2><span class="sev p2">P2</span> Perceived quality &amp; polish</h2>
-    <p class="h2sub">Cheap wins that lift the whole feel.</p>
-
-    <div class="find p2">
-      <h3>Slow images, no skeletons on the main grids <span class="status unknown">not re-verified</span></h3>
-      <p>Instant Packs, Live Streams, and the in-stream Shop render as gray/black boxes for ~4–5s before the (great) art loads — first impression reads “broken/empty.” Notably, the <b>Marketplace already uses proper skeleton loaders</b> — the pattern exists in the codebase; it just needs to be applied consistently.</p>
-      <p class="update"><b>Re-test:</b> pages and art loaded fast in our pass (good network) — couldn’t reproduce either way. Downgrade confidence; verify on a throttled connection.</p>
-    </div>
-
-    <div class="find p2">
-      <h3>Deep links &amp; refresh break <span class="status still">still true</span></h3>
-      <p>Direct URLs to <code>/home</code>, <code>/rewards</code>, and <code>/marketplace</code> all <b>404</b> (they redirect to <code>/streams/*</code>). Bad for SEO and for sharing a link to any top-level page. Hard refresh also reboots the whole app behind a full-screen spinner.</p>
-      <p class="update"><b>Re-test:</b> <code>/home</code> and <code>/rewards</code> still 404. Routes have also <i>moved without redirects</i>: Marketplace now lives at <code>/shop</code>, and the old <code>/streams/home</code> (the previous Home tab) now 404s too — yesterday’s shared links are today’s dead ends.</p>
-    </div>
-
-    <div class="find p2">
-      <h3>404 page breaks the theme <span class="status still">still true</span></h3>
-      <p>It’s bright white in an otherwise dark app — a jarring flash.</p>
-      <p class="update"><b>Re-test:</b> unchanged — and with the route moves above, users are <i>more</i> likely to see it.</p>
-      <div class="shot"><img src="img/audit-404.jpg" alt="Drip's bright white 404 page" /><span class="cap">Jul 19 — the white 404, hit from a previously-valid deep link on the otherwise dark site.</span></div>
-    </div>
-
-    <div class="find p2">
-      <h3>The Live Streams page feels empty <span class="status still">still true</span></h3>
-      <p>Only ~4 concurrent streams, one row, ~80% empty page, and <b>no category filters</b> (Instant Packs already has them). No “starting soon,” scheduled, replays, or live-preview thumbnails to fill it or aid discovery.</p>
-      <p class="update"><b>Re-test:</b> unchanged — 3 live streams, one “Happening Now” row, no filters, no schedule, no replays. The Home tab now merchandises streams much better (categories, featured, RSVP cards) — the Live tab deserves the same treatment.</p>
-    </div>
-
-    <div class="find p2">
-      <h3>The first-stream gate is heavy <span class="status unknown">not re-verified</span></h3>
-      <p>Four manual checkboxes (including “purchases and bids are binding and final”) before you can watch your first stream.</p>
-      <p class="update"><b>Re-test:</b> no gate appeared when opening streams logged-out — likely logged-in only; not verified this pass.</p>
     </div>
 
     <!-- Strengths -->

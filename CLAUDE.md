@@ -56,8 +56,8 @@ frame id 9:2, with real screenshots).
   (inline lightbox script in audit.html).
   Findings re-tested Jul 19 (logged-out): each finding carries a status chip
   (resolved / still true / partial / not re-verified). P0 resolved (Statsig 500s but pages
-  render); chat-behind-Comment, login ordering, sparse Live page, deep-link 404s all still true.
-  Screenshots: `img/audit-404.jpg`, `img/audit-freepack.png` (Drip's new in-stream free-pack pitch).
+  render); chat-behind-Comment + login ordering still true. The whole P2 section was
+  removed Jul 21 (inaccurate per user). Screenshots: `img/audit-freepack.png`.
 - `css/kiri-base.css` — Kiri-derived tokens + primitives (Drip colors).
 - `css/drip.css` — the Drip skin + all app components + responsive rules.
 - `js/data.js` — all mock data (streams, lots, chat, image URLs by name).
@@ -85,9 +85,8 @@ frame id 9:2, with real screenshots).
 - **P1 (conversion):** no "free pack" payoff after signup; stored-value wallet + 2% deposit
   fee; live chat hidden behind a "Comment" button on desktop (~40% dead space); login buries
   Google/Apple under phone + wallet.
-- **P2 (polish):** no skeletons on main grids (but Marketplace has them); deep links to
-  `/home`/`/rewards`/`/marketplace` 404; white 404 page; sparse Live page; heavy 4-checkbox
-  first-stream gate.
+- **P2 (polish):** REMOVED from audit.html Jul 21 — user said none of it was accurate.
+  Don't re-add without fresh verification.
 - **Strengths:** pack/box art, Instant Packs, deep in-stream shop, Driplets/rewards, Google Pay.
 
 ## Open TODOs / next ideas
